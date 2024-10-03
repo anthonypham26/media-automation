@@ -1,5 +1,1 @@
-pytube
-moviepy
-openai-whisper
-torch
-ffmpeg-python
+pytubefix
