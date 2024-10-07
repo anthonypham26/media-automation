@@ -1,5 +1,8 @@
 # Ignore the virtual environment
 whisper_env/
+audios/
+videos/
+output/
 
 # Ignore Python cache files
 __pycache__/
