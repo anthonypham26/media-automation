@@ -1,7 +1,6 @@
 # media-automation
-TikTok/Instagram Content Creation Automation Tool
 
-### README
+### TikTok/Instagram Content Creation Automation Tool README
 ---
 ### Project Overview 
 
@@ -63,39 +62,18 @@ This Python project automates the entire video processing workflow, leveraging m
    ```bash
    pip install -r requirements.txt
    ```
-
-#### `requirements.txt` Example
-
-```txt
-pytubefix
-ffmpeg-python
-moviepy
-faster-whisper
-```
-
-2. **Run the Script**:
+3. **Run the Script**:
    - Run the Python script and enter a YouTube URL when prompted.
    ```bash
    python clipper.py
    ```
-
-3. **Output**:
+4. **Output**:
    - The processed video (cropped and with embedded subtitles) will be saved in the `output/` folder.
-   - Example: `output/Hearing Aid feature for AirPods Pro 2 cropped_captioned.mp4`
 
 #### Customization
 
 - **Subtitle Styling**: You can modify the subtitle appearance (font, color, alignment, etc.) by adjusting the `force_style` string in the `embed_captions_to_video` function.
 - **Subtitle Grouping**: Change the number of words per subtitle by adjusting the `words_per_chunk` parameter in the `generate_subtitles_file` function.
-
-#### Example
-
-```python
-run_clipper()
-```
-
-- **Input**: You will be asked to provide a YouTube URL.
-- **Output**: A cropped video with embedded subtitles will be saved to the `output/` folder, and working folders (`audios/` and `videos/`) will be cleared after processing.
 
 #### License
 
