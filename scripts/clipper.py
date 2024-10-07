@@ -16,6 +16,8 @@ def download_video(url):
     print(f"Path: {path}")
     return path
 
+# download_video('https://youtu.be/dOuNLS1elWs?si=3fheYEeVwhhJft7s')
+
 def crop_vertical(path):
     print(f"Cropping Video...")
     clip = mpy.VideoFileClip(path)
@@ -27,6 +29,7 @@ def crop_vertical(path):
     new_path = path.replace('.mp4', '_cropped_vert.mp4')    
     clip_cropped.write_videofile(new_path)
 
+# crop_vertical('videos/Hearing Aid feature for AirPods Pro 2  Apple.mp4')
 
 from faster_whisper import WhisperModel
 
@@ -67,54 +70,60 @@ def generate_subtitles_file(audio_file, segments):
     f.close
     return subtitles_file
 
-# segments = transcribe_video("audios/ICYMI — Apple Event Highlights.mp3")
-# generate_subtitles_file("audios/ICYMI — Apple Event Highlights.mp3",segments)
+# segments = transcribe_video("audios/Hearing Aid feature for AirPods Pro 2  Apple.mp3")
+# generate_subtitles_file("audios/Hearing Aid feature for AirPods Pro 2  Apple.mp3",segments)
 
-# def embed_captions_to_video(video_file, audio_file, subtitle_file, output_file):
-# Step 1: Add subtitles to the video
-# video_with_subtitles = ffmpeg.input('videos/ICYMI — Apple Event Highlights_cropped_vert.mp4')
-# video_with_subtitles = ffmpeg.filter(video_with_subtitles, 'subtitles', 'audios/ICYMI — Apple Event Highlights.mp3_captioned.srt')
 
-# # Step 2: Add audio to the video (with subtitles)
-# audio_input_stream = ffmpeg.input('audios/ICYMI — Apple Event Highlights.mp3')
+def embed_captions_to_video(video_path, audio_path, srt_path):
+    print(video_path)
+    video = ffmpeg.input(video_path)
+    print(srt_path)
+    captioned_video = ffmpeg.filter(video,'subtitles', srt_path)
+    print(audio_path)
+    audio = ffmpeg.input(audio_path)
+    # output_path = "output/" + 
+    # output = ffmpeg.output(captioned_video, audio, , vcodec='libx264', acodec='aac )
+    ffmpeg.run(output, overwrite_output=True)                       
 
-# # Step 3: Concatenate the video (with subtitles) and audio together
-# output = ffmpeg.concat(video_with_subtitles, audio_input_stream, v=1, a=1)
 
-# # Step 4: Run the ffmpeg command
+
+
+
+# video_with_subtitles = ffmpeg.input('videos/Hearing Aid feature for AirPods Pro 2  Apple.mp4')
+# video_with_subtitles = ffmpeg.filter(video_with_subtitles, 'subtitles', 'audios/Hearing Aid feature for AirPods Pro 2  Apple.mp3_captioned.srt')
+
+
+# audio_input_stream = ffmpeg.input('audios/Hearing Aid feature for AirPods Pro 2  Apple.mp3')
+
+# output = ffmpeg.output(video_with_subtitles, audio_input_stream, 'output/Hearing_Aid_feature_with_audio_and_subtitles.mp4', vcodec='libx264', acodec='aac')
+
 # ffmpeg.run(output, overwrite_output=True)
 
-# print(f"Captions and audio embedded successfully into {output_file}")
-
-
-# Step 1: Add subtitles to the video
-video_input_stream = ffmpeg.input('videos/ICYMI — Apple Event Highlights_cropped_vert.mp4')
-subtitle_input_stream = 'audios/ICYMI — Apple Event Highlights.mp3_captioned.srt'  # subtitle file
-video_with_subtitles = ffmpeg.filter(video_input_stream, 'subtitles', subtitle_input_stream)
-
-# Step 2: Add audio to the video (with subtitles)
-audio_input_stream = ffmpeg.input('audios/ICYMI — Apple Event Highlights.mp3')
-
-# Step 3: Combine video (with subtitles) and audio together by explicitly mapping streams
-output_video = 'output/ICYMI_Apple_Event_Highlights_captioned_output.mp4'
-ffmpeg_output = (
-    ffmpeg
-    .output(
-        video_with_subtitles, 
-        audio_input_stream, 
-        output_video, 
-        vcodec='libx264',  # Re-encode video using libx264 codec
-        acodec='aac',  # Encode audio as AAC
-        strict='experimental',
-        shortest=None  # Ensure the shortest duration is respected, to avoid desync issues
-    )
-    .run(overwrite_output=True)
-)
-
-print(f"Video with audio and subtitles has been successfully processed: {output_video}")
 
 
 
+
+# # # Step 1: Add subtitles to the video
+# video_input_stream = ffmpeg.input('videos/ICYMI — Apple Event Highlights_cropped_vert.mp4')
+# subtitle_input_stream = 'audios/ICYMI — Apple Event Highlights.mp3_captioned.srt'  # subtitle file
+# video_with_subtitles = ffmpeg.filter(video_input_stream, 'subtitles', subtitle_input_stream)
+
+# ffmpeg.concat(video_input_stream, subtitle_input_stream, v=1, a=1)
+
+
+# def merge_video_audio(input_video, input_audio, output_file):
+#     # Add quotes around file paths to handle spaces or special characters
+#     # ffmpeg -i silent.mp4 -i music.mp3 -map 0:v -map 1:a -c copy video_with_music.mp4
+
+#     command = f'ffmpeg -i "{input_video}" -i "{input_audio}" -map 0:v -map 1:a? -c copy "{output_file}"'
+#     os.system(command)
+
+
+
+# command = f'ffmpeg -i "videos/Hearing Aid feature for AirPods Pro 2  Apple.mp4" -i "audios/Hearing Aid feature for AirPods Pro 2  Apple.mp3" -c:v copy -c:a aac "output/Hearing_Aid_feature_for_AirPods_Pro_2_Apple_output.mp4"'
+# os.system(command)
+
+# ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac output.mp4
 
 
     
