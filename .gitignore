@@ -4,7 +4,7 @@ audios/
 videos/
 output/
 
-# Ignore OS-specific files
+# Ignore OS-specific files 
 .DS_Store
 
 # Ignore Python cache files
